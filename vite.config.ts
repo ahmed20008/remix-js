@@ -9,6 +9,24 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  optimizeDeps: {
+    include: [
+      "@apollo/client/core",
+      "@apollo/client/cache",
+      "@apollo/client/link/http",
+      "@apollo/client/react",
+    ],
+    esbuildOptions: {
+      define: {
+        global: "globalThis",
+      },
+    },
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
   plugins: [
     remix({
       future: {
